@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { device } from "../../utils/styles/BreakPoint";
-import { NavbarPros } from "./types";
+import { NavbarPros, isHoveringProp, openProps } from "./types";
 
 
 export const NavbarContainer=styled.div<NavbarPros>`
@@ -28,7 +28,6 @@ export const NavbarContainer=styled.div<NavbarPros>`
 
 export const NavbarElements=styled.div`
 @media ${device.xl}{
-
 }
 @media ${device.lg}{
  display:flex;
@@ -45,14 +44,26 @@ export const NavbarElements=styled.div`
   display:none;
  }
 
+ .c_icon{
+  color:#fff !important;
+ }
+ .white_icon{
+  color:#fff !important;
+ }
+
  .close_icon{
-  display:none;
+  position:fixed;
+  display:block;
+  transform:translate(-150%,40%);
+  font-size:25px;
+  z-index:800;
  }
   .first_section {
    display:flex;
   }
 
   .first_section ul{
+    cursor:pointer;
    display:flex;
    gap:2rem;
    transform:translate(-20%, 72%);
@@ -80,15 +91,18 @@ export const NavbarElements=styled.div`
   }
 
   .last_section {
+    cursor:pointer;
+    transform:translate(-23%, 2%);
   }
 
   .last_section ul{
    display:flex;
    gap:2rem;
-   transform:translate(-5%, 280%);
+   
   }
 
   .last_section ul li{
+    cursor:pointer;
     white-space:nowrap;
     list-style:none;
   }
@@ -110,7 +124,7 @@ export const NavbarElements=styled.div`
 
 
   .menu_icon{
-    display:block;
+    display:none;
     position:relative;
   }
   .menu_icon .m_icon{
@@ -144,6 +158,7 @@ export const NavbarElements=styled.div`
 
   .menu_icon{
     display:block;
+    z-index:50000;
   }
 
   .menu_icon.menuIconFixed{
@@ -165,3 +180,120 @@ export const NavbarElements=styled.div`
 }
 
 `;
+
+
+
+export const DropDown=styled.div<openProps>`
+  
+  @media ${device.lg}{
+      display:none;
+  }
+  @media ${device.sm}{
+    display:${({open})=>(open ? 'block' : 'none')};  
+  
+    ul {
+       display:${({open})=>(open ? 'block':'none')};
+      width:351px;
+      z-index:2150;
+      height:180vh;
+      position:fixed;
+      top:-0.8rem;
+      left:0;
+      right:0;
+      background-color:${({theme})=>theme.colors.primaryColor};
+
+      >li{
+        font-weight:500;
+        transform:translate(0,280%);
+        margin-bottom:10px;
+        margin-left:4rem;
+        list-style-type: none;
+        margin-top:2em;
+      }
+
+}
+
+  }
+`;
+
+
+export const DestinationDrop=styled.div<isHoveringProp>`
+@media ${device.lg}{
+  position:relative
+  >ul{
+    width:100px;
+    height:100px;
+    position:absolute;
+    left:-40rem;
+    top:6.5rem;
+    z-index:1000;
+    background-color:${({theme})=>theme.colors.primaryColor};
+    transform:${({scrollPosition})=>(scrollPosition > 500 ? "translate(35%,-65%)" : "translate(15%,-5%)" )};
+    >li{
+      cursor:pointer;
+      list-style:none;
+      transform:translate(-40%);
+      margin-bottom:2px;
+    }
+
+  }
+}
+`;
+
+
+export const ShowDrop=styled.div<isHoveringProp>`
+@media ${device.lg}{
+  position:relative;
+  >ul{
+    position:absolute;
+    width:150px;
+    display:${({isShopping})=>(isShopping ? 'block' : 'none')};
+    width:150px;
+    height:55px;
+    top:2rem;
+    left:-4.5rem;
+    color:red;
+    z-index:1000;
+    transform:${({scrollPosition})=>(scrollPosition > 500 ? "translate(-40%,5%)" : "translate(-30%,120%)" )};
+    background-color:${({theme})=>theme.colors.primaryColor};
+
+    >li{
+      list-style:none;
+      transform:translate(-30%);
+      white-space:nowrap;
+      color:#fff;
+    }
+  }
+}
+`;
+
+export const AboutDrop=styled.div<isHoveringProp>`
+@media ${device.lg}{
+  position:relative;
+  >ul{
+    position:absolute;
+    width:150px;
+    display:${({isAboutHovering})=>(isAboutHovering ? 'block' : 'none')};
+    width:100px;
+    height:auto;
+    top:5.5rem;
+    left:-8rem;
+    color:red;
+    z-index:1000;
+    transform:${({scrollPosition})=>scrollPosition > 500 ? "translate(60%, -43%)" : "translate(70%, 15%)"};
+     background-color:${({theme})=>theme.colors.primaryColor};
+
+    >li{
+      list-style:none;
+      transform:translate(-55%);
+      white-space:nowrap;
+      margin-bottom:1px;
+      color:#fff;
+      
+    }
+  }
+}
+`;
+
+
+
